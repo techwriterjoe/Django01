@@ -8,17 +8,14 @@
 		<div>
 			<h1><a href="">Django Blog</a></h1>
 		</div>
-
+		
+		{% for post in posts %}
 		<div>
-			<p>pub: 22222, 12.14</p>
-			<h2><a href="">First Post</a></h2>
-			<p>Aenean eu leo quam</p>
+			<p>published: {{ post.published_date }}</p>
+			<h1><a href="">{{ post.title }}</a></h1>		
+			<p>{{ post.text|linebreaksbr }}</p>
 		</div>
-
-		<div>
-			<p>pub: 22222, 12:15</p>
-			<h2><a href="">Second Post</a></h2>
-			<p>Stuff Stuff Stuff</p>
+		{% endfor %}
 		</div>
 	</body>
 </html>	

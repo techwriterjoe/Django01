@@ -3,13 +3,67 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-{% for post in posts %}
-	<div class="post">
-		<div class="date">
-			{{ post.published_date }}
-		</div>
-		<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-		<p>{{ post.text|linebreaksbr }}</p>
-	</div>
-{% endfor %}
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+{% if remainder_tiles == 0 %}
+	
+	{% for post in posts %}
+		<p>{{post.title}}</p>
+		{% with pk_index=post_count %}
+		{% if post.pk|divisibleby:"3" == 0 %}
+    <tr>
+                    <!--padding == top, right, bottom, left-->
+        <td bgcolor="#ffffff" align="center" style="padding: 70px 0px 25px 0px;" class="section-padding">
+            <table border="0" cellpadding="0" cellspacing="0" width="625" style="padding:0 0 20px 0;" class="responsive-table">
+                <tr>
+                    <td align="center" height="100%" valign="top" width="100%" style="padding-bottom: 35px;">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:625;">
+                            <tr>
+                                <td align="left" valign="top" style="font-size:0;">
+                                    <!-- left align -->
+                                    <div style="display:inline-block; margin: 0 16px 0 16px; max-width:175px; vertical-align:top; width:100%; padding: 0px 0px 0px 0px;">
+                                    <!--padding == top, right, bottom, left-->
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="175">
+                                            <tr>
+                                                <td valign="top" ><a href="mar-monthly/mar-monthly.html" target="_blank">{{ post.title }}<img src="images/march-monthly-tile.png" alt="alt text here" width="175" height="250" border="0" style="display: block; font-family: Arial; color: #266e9c; font-size: 14px;"></a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+		{% endif %}
+		{% if post.pk|divisibleby:"3" == 1 %}
+                                    <!-- right align -->
+                                    <div style="display:inline-block; margin: 0 16px 0 16px; max-width:175px; vertical-align:top; width:100%; padding: 0px 0px 0px 0px;">
+                                    <!--padding == top, right, bottom, left-->
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="175">
+                                            <tr>
+                                                <td valign="top" ><a href="feb-monthly/feb-monthly.html" target="_blank">{{ post.title }}<img src="images/february-tile.png" alt="alt text here" width="175" height="250" border="0" style="display: block; font-family: Arial; color: #266e9c; font-size: 14px;"></a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>                                    
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+		{% endif %}
+		{% if pk_index|divisibleby:"3" == 2 %}
+                                    <!-- center align -->
+                                    <!--padding == top, right, bottom, left-->
+                                    <div style="display:inline-block; margin: 0 16px 0 16px; max-width: 175px; vertical-align:top; width:100%;">
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="175">
+                                            <tr>
+                                                <td valign="top" ><a href="os-case-study/os-case-study.html" target="_blank">{{ post.title }}<img src="images/open-source-tile.png" alt="alt text here" width="175" height="250" border="0" style="display: block; font-family: Arial; color: #266e9c; font-size: 14px;"></a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+		{% endif %}
+		{% endwith %}
+{% endfor %}				
+		{% else %}
+		<p> there are no tiles </p>
+		{% endif %}
 {% endblock %}

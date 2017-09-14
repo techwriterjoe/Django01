@@ -6,6 +6,9 @@ from django.utils import timezone
 from .forms import PostForm
 # Create your views here.
 
+# Next step is to figure out the use cases where remainder_tiles == 1 and == 2
+# Also figure the CSS mess
+
 def post_list(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 	posts = posts.reverse()
@@ -13,7 +16,7 @@ def post_list(request):
 	remainder_tiles = post_count % 3
 	#fix modulus problem in the templates
 	if remainder_tiles == 0:
-		return render(request, 'blog/post_list.html', {'posts': posts})
+		return render(request, 'blog/post_list.html', {'posts': posts, 'post_count': post_count})
 	else:
 		return render(request, 'blog/post_list.html', {'posts': posts})
 
